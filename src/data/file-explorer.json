@@ -1,0 +1,96 @@
+[
+  {
+    "id": "1",
+    "name": "node_modules",
+    "isFolder": true,
+    "children": [
+      {
+        "id": "2",
+        "name": "react",
+        "isFolder": true,
+        "children": [
+          {
+            "id": "3",
+            "name": "index.js",
+            "isFolder": false
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "name": "react-dom",
+        "isFolder": true,
+        "children": [
+          {
+            "id": "5",
+            "name": "index.js",
+            "isFolder": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "name": "public",
+    "isFolder": true,
+    "children": [
+      {
+        "id": "7",
+        "name": "index.html",
+        "isFolder": false
+      },
+      {
+        "id": "8",
+        "name": "favicon.ico",
+        "isFolder": false
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "src",
+    "isFolder": true,
+    "children": [
+      {
+        "id": "10",
+        "name": "components",
+        "isFolder": true,
+        "children": [
+          {
+            "id": "11",
+            "name": "test",
+            "isFolder": true,
+            "children": [
+              {
+                "id": "12",
+                "name": "test.js",
+                "isFolder": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "13",
+        "name": "App.js",
+        "isFolder": false
+      },
+      {
+        "id": "14",
+        "name": "index.js",
+        "isFolder": false
+      },
+      {
+        "id": "15",
+        "name": "styles.css",
+        "isFolder": false
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "name": "package.json",
+    "isFolder": false
+  }
+]
