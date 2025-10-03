@@ -1,54 +1,58 @@
-import React from "react";
 import Sidebar from "./components/sidebar";
 import MainContent from "./components/main-content";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useState, useEffect } from "react";
+
+import MiniSidebar from "./components/mini-sidebar";
+import { useResizableSidebar } from "./hooks/useResizableSidebar";
 
 const FileExplorer = () => {
-  const [sidebarWidth, setSidebarWidth] = useState(() => {
+  const {
+    width: sidebarWidth,
+    isResizing,
+    tooltipWidth,
+    startResizing,
+  } = useResizableSidebar(() => {
     const savedWidth = localStorage.getItem("sidebar-width");
-    return savedWidth !== null ? parseFloat(savedWidth) : 20; // default to 20% if not found
+    return savedWidth !== null ? parseFloat(savedWidth) : 20;
   });
 
-  const animationFrameId = useRef(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
+    const savedOpen = localStorage.getItem("sidebar-open");
+    return savedOpen !== null ? JSON.parse(savedOpen) : true; // default open
+  });
 
   // Save width to localStorage whenever it changes
   useEffect(() => {
-    const handle = setTimeout(() => {
-      localStorage.setItem("sidebar-width", sidebarWidth.toString()); // convert to string
-    }, 300); // debounce to avoid excessive writes
-    return () => clearTimeout(handle);
-  }, [sidebarWidth]);
-  const startResizing = (e) => {
-    const startX = e.clientX;
-    const startWidth = sidebarWidth;
+    if (isSidebarOpen) {
+      const handle = setTimeout(() => {
+        localStorage.setItem("sidebar-width", sidebarWidth.toString()); // convert to string
+      }, 300); // debounce to avoid excessive writes
+      return () => clearTimeout(handle);
+    }
+  }, [sidebarWidth, isSidebarOpen]);
 
-    const doDrag = (e) => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-      animationFrameId.current = requestAnimationFrame(() => {
-        const containerWidth = document.documentElement.clientWidth; // full window width
-        const deltaX = ((e.clientX - startX) / containerWidth) * 100; //  convert to percentage
-        const newWidth = startWidth + deltaX;
-        if (newWidth >= 10 && newWidth <= 80) {
-          setSidebarWidth(newWidth);
-        }
-      });
-    };
+  // Save open/close state to localStorage
+  useEffect(() => {
+    localStorage.setItem("sidebar-open", JSON.stringify(isSidebarOpen));
+  }, [isSidebarOpen]);
 
-    const stopDrag = () => {
-      document.removeEventListener("mousemove", doDrag);
-      document.removeEventListener("mouseup", stopDrag);
-    };
-
-    document.addEventListener("mousemove", doDrag);
-    document.addEventListener("mouseup", stopDrag);
+  const handleSidebarToggle = () => {
+    setIsSidebarOpen((prev) => !prev);
   };
+
   return (
     <div className="flex h-screen w-full">
-      <Sidebar width={sidebarWidth} handleResize={startResizing} />
+      <MiniSidebar onSidebarToggle={handleSidebarToggle} />
+
+      {isSidebarOpen && (
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          width={sidebarWidth}
+          handleResize={startResizing}
+          isResizing={isResizing}
+          tooltipWidth={tooltipWidth}
+        />
+      )}
       <MainContent />
     </div>
   );

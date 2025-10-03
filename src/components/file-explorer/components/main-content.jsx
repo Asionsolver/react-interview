@@ -1,6 +1,6 @@
 const MainContent = () => {
   return (
-    <div className="bg-gray-900 text-white relative flex-1  p-6">
+    <div className="bg-[#191515] text-white relative flex-1  p-6">
       <h1 className="text-2xl font-bold mb-4">Main Content</h1>
       <p>
         Drag the sidebar’s right edge to resize. Width is limited between
