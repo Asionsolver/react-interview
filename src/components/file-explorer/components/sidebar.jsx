@@ -10,11 +10,11 @@ const Sidebar = memo(({ width, handleResize, isResizing, tooltipWidth }) => {
         width: `${width}%`,
       }}
     >
-      <div className="p-4 font-semibold">📂 Sidebar</div>
+      <div className="p-4 text-xs text-gray-300 uppercase">📂 Explorer</div>
 
       <div
         onMouseDown={handleResize}
-        className="absolute top-0 right-0 w-1 h-full cursor-col-resize  hover:bg-blue-500 active:bg-blue-500 overflow-hidden"
+        className="absolute top-0 right-0 w-1 h-full cursor-col-resize  hover:bg-blue-500 active:bg-blue-500 "
       >
         {isResizing && <Tooltip width={tooltipWidth} />}
       </div>

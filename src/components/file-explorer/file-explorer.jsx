@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import MiniSidebar from "./components/mini-sidebar";
 import { useResizableSidebar } from "./hooks/useResizableSidebar";
+import { useCallback } from "react";
 
 const FileExplorer = () => {
   const {
@@ -36,13 +37,16 @@ const FileExplorer = () => {
     localStorage.setItem("sidebar-open", JSON.stringify(isSidebarOpen));
   }, [isSidebarOpen]);
 
-  const handleSidebarToggle = () => {
+  const handleSidebarToggle = useCallback(() => {
     setIsSidebarOpen((prev) => !prev);
-  };
+  }, []);
 
   return (
     <div className="flex h-screen w-full">
-      <MiniSidebar onSidebarToggle={handleSidebarToggle} />
+      <MiniSidebar
+        onSidebarToggle={handleSidebarToggle}
+        isSidebarOpen={isSidebarOpen}
+      />
 
       {isSidebarOpen && (
         <Sidebar

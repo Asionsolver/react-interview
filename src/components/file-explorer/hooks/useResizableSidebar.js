@@ -1,11 +1,18 @@
 import { useState, useRef, useCallback } from "react";
+import { useInitialWidth } from "./useInitialWidth";
 
 // Custom hook for resizing sidebar
 export const useResizableSidebar = (initialWidth) => {
-  const [width, setWidth] = useState(initialWidth);
+  const initialCalculatedWidth = useInitialWidth(initialWidth);
+
+  const [width, setWidth] = useState(initialCalculatedWidth);
+
   const [isResizing, setIsResizing] = useState(false);
-  const [tooltipWidth, setTooltipWidth] = useState(initialWidth);
+
+  const [tooltipWidth, setTooltipWidth] = useState(initialCalculatedWidth);
+
   const animationFrameId = useRef(null);
+
   const startResizing = useCallback(
     (e) => {
       const startX = e.clientX;
