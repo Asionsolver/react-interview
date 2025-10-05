@@ -6,6 +6,8 @@ import FileExplorer from "./components/file-explorer/file-explorer";
 import Pagination from "./components/pagination/pagination";
 import ProgressBar from "./components/progress-bar/progress-bar";
 import TabForm from "./components/tab-form/tab-form";
+import Theme from "./components/theme/theme";
+import { ThemeProvider } from "./components/theme/ThemeProvider";
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
       {/* <Pagination /> */}
       {/* <AutoSearchBar /> */}
       {/* <ProgressBar /> */}
-      <FileExplorer />
+      {/* <FileExplorer /> */}
+      <Theme />
     </>
   );
 }

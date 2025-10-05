@@ -1,6 +1,147 @@
 @import "tailwindcss";
+
+@import "tailwindcss";
+
+/* Tailwind এ custom theme variables */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+}
+
+/* Default (Light) Theme */
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --primary: #2563eb; /* Blue */
+  --secondary: #9333ea; /* Purple */
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --primary: #38bdf8; /* Cyan */
+  --secondary: #f472b6; /* Pink */
+}
+
+/* Green Theme */
+[data-theme="green"] {
+  --background: #f0fdf4;
+  --foreground: #064e3b;
+  --primary: #22c55e; /* Green */
+  --secondary: #15803d;
+}
+
+/* @keyframes fade-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes cross-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
+
+/* @keyframes circle-reveal {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0.8;
+    filter: blur(30px);
+  }
+  100% {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+    filter: blur(0px);
+  }
+} */
+/* 
+@keyframes circle-reveal {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    filter: blur(40px);
+  }
+  100% {
+    clip-path: circle(150% at 50% 50%);
+    filter: blur(0px);
+  }
+} */
+
+/* @keyframes circular-reveal {
+  from {
+    clip-path: circle(0% at 50% 50%);
+  }
+  to {
+    clip-path: circle(150% at 50% 50%);
+  }
+} */
+
+/* @keyframes circular-reveal {
+  from {
+    clip-path: circle(0% at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(150% at var(--x) var(--y));
+  }
+} */
+
+/* @layer utilities {
+  .animate-fade-scale {
+    animation: fade-scale 0.4s ease-in-out;
+  }
+  .animate-cross-fade {
+    animation: cross-fade 0.6s ease-in-out;
+  }
+
+  .theme-circle-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-circle-bg::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: var(--next-bg);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .animate-circle {
+    animation: circle-expand 0.6s ease-in-out forwards;
+
+    @keyframes circle-expand {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+      }
+      100% {
+        width: 300vw;
+        height: 300vw;
+        opacity: 1;
+      }
+    }
+  }
+} */
+
 /* General Accordion Styles */
-.accordion {
+/* .accordion {
   width: 100%;
   max-width: 400px;
 
@@ -11,18 +152,18 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   font-family: "Arial", sans-serif;
   margin: 200px auto;
-}
+} */
 
 /* Accordion Item Styles */
-.accordion-item {
+/* .accordion-item {
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
-}
+} */
 
 /* Accordion Title Button */
-.accordion-title {
+/* .accordion-title {
   width: 100%;
   padding: 15px;
   text-align: left;
@@ -53,4 +194,44 @@
   font-size: 16px;
   color: #666;
   text-align: center;
+} */
+
+@layer utilities {
+  /* Circular overlay */
+  .circle-overlay {
+    position: fixed;
+    inset: 0;
+    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  @keyframes circle-reveal {
+    from {
+      clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+    }
+    to {
+      clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
+    }
+  }
+
+  .animate-circle-reveal {
+    animation: circle-reveal 0.7s ease-in-out forwards;
+  }
+
+  /* Content fade + scale */
+  @keyframes content-fade-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-content-fade {
+    animation: content-fade-scale 0.6s ease-in-out;
+  }
 }
