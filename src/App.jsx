@@ -10,6 +10,7 @@ import ProgressBar from "./components/progress-bar/progress-bar";
 import TabForm from "./components/tab-form/tab-form";
 import Theme from "./components/theme/theme";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
+import Todo from "./components/todo-list/todo";
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
       {/* <FileExplorer /> */}
       {/* <Theme /> */}
       {/* <Otp /> */}
-      <ChipsInput />
+      {/* <ChipsInput /> */}
+      <Todo />
     </>
   );
 }
