@@ -9,3 +9,30 @@
 ✅ Only one section should be expanded at a time.
 
 ✅ Use functional components and React hooks.
+
+## Auto Complete Search Bar
+
+✅ Create an auto-complete search bar using React.
+✅ As the user types, display a list of suggestions that match the input.
+
+## Pagination
+
+✅ Create a pagination component using React.
+✅ Display a list of items with pagination controls to navigate between pages.
+
+## Progress Bar
+
+✅ Create a progress bar component using React.
+✅ The progress bar should fill up based on a given percentage prop.
+
+## Tab Form
+
+✅ Create a tabbed form using React.
+✅ Each tab should contain different form fields.
+✅ Only one tab's form fields should be visible at a time.
+
+## Multi Theme Switcher
+
+✅ Create a multi-theme switcher using React.
+✅ Allow users to switch between at least three different themes (e.g., light, dark, colorful).
+✅ The selected theme should persist across page reloads.
