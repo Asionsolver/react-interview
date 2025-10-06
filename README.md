@@ -44,3 +44,15 @@
 ✅ Automatically focus on the next input field as the user types.
 ✅ Allow users to paste the entire OTP into the first input field, populating all fields accordingly
 ✅ When all input fields are filled, trigger a callback function to handle the OTP submission.
+
+## Chips or Tag Input
+
+✅ Create a chips or tag input component using React.
+✅ Allow users to add and remove tags.
+✅ Display the tags in a visually appealing manner.
+✅ Allow users to type and press Enter to create a new tag.
+✅ Prevent duplicate tags from being added.
+✅ Allow users to remove tags by clicking on a small "x" icon next to each tag.
+✅ Provide a callback function that returns the current list of tags whenever they are added or removed.
+✅ Auto Suggest tags from a predefined list as the user types.
+✅ Allow Category based tags with different colors or styles.

@@ -91,7 +91,7 @@ const ChipsInput = () => {
         </div>
 
         {inputValue.trim() !== "" && filteredSuggestions.length > 0 && (
-          <div className="border border-gray-300 rounded mt-2 bg-white shadow w-auto max-h-auto">
+          <div className="border border-gray-300 rounded mt-2 bg-white shadow w-auto max-h-[500px] overflow-y-auto">
             {filteredSuggestions.map((s, index) => {
               const colorClass =
                 categoryColors[s.category] || categoryColors.default;
@@ -114,7 +114,7 @@ const ChipsInput = () => {
         )}
       </div>
 
-      <div className="mt-4 text-gray-600 flex flex-wrap  max-w-2xl p-2 rounded gap-2">
+      <div className="mt-4 text-gray-600 flex flex-wrap  max-w-2xl  rounded gap-2">
         {chips.map((chip, index) => {
           const colorClass =
             categoryColors[chip.category] || categoryColors.default;
