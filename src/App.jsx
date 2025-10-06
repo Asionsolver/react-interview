@@ -2,6 +2,7 @@ import Accordion from "./components/accordion";
 import AutoSearchBar from "./components/autocomplete-searchbar/auto-searchbar";
 import ProblemOne from "./components/bento-grid/problem-one";
 import ProblemTwo from "./components/bento-grid/problem-two";
+import ChipsInput from "./components/chips-input/chips-input";
 import FileExplorer from "./components/file-explorer/file-explorer";
 import Otp from "./components/otp/otp";
 import Pagination from "./components/pagination/pagination";
@@ -22,7 +23,8 @@ function App() {
       {/* <ProgressBar /> */}
       {/* <FileExplorer /> */}
       {/* <Theme /> */}
-      <Otp />
+      {/* <Otp /> */}
+      <ChipsInput />
     </>
   );
 }

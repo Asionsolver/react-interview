@@ -36,3 +36,11 @@
 ✅ Create a multi-theme switcher using React.
 ✅ Allow users to switch between at least three different themes (e.g., light, dark, colorful).
 ✅ The selected theme should persist across page reloads.
+
+## OTP Input
+
+✅ Create an OTP (One-Time Password) input component using React.
+✅ The component should consist of 1-5 input fields for each digit of the OTP.
+✅ Automatically focus on the next input field as the user types.
+✅ Allow users to paste the entire OTP into the first input field, populating all fields accordingly
+✅ When all input fields are filled, trigger a callback function to handle the OTP submission.
