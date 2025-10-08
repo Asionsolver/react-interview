@@ -28,6 +28,12 @@ const ProductTable = () => {
   // New state for category filter
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  // New state for items per page
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  // Items per page options
+  const itemsPerPageOptions = [5, 10, 15, 20, 25, 30];
 
   // Extract unique categories from products
   const categories = useMemo(() => {
@@ -123,11 +129,11 @@ const ProductTable = () => {
 
   const totalProducts = filteredProducts.length;
 
-  const totalPages = Math.ceil(totalProducts / PRODUCT_PER_PAGE);
+  const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
-  const start = (currentPage - 1) * PRODUCT_PER_PAGE;
+  const start = (currentPage - 1) * itemsPerPage;
 
-  const end = start + PRODUCT_PER_PAGE;
+  const end = start + itemsPerPage;
 
   const getPaginationNumbers = () => {
     const pages = [];
@@ -159,8 +165,14 @@ const ProductTable = () => {
   const clearAllCategories = () => {
     setSelectedCategories([]);
   };
+
+  const handleItemsPerPageChange = (value) => {
+    setItemsPerPage(value);
+    setCurrentPage(1); // Reset to first page when items per page changes
+    setShowDropdown(false);
+  };
   return (
-    <div className="container mx-auto p-6 bg-gray-50 min-h-screen">
+    <div className="relative container mx-auto p-6 bg-gray-50 min-h-screen">
       {/* Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800 mb-2">
@@ -221,7 +233,7 @@ const ProductTable = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-visible">
         <div className="overflow-x-auto">
           {sortedProducts.length > 0 &&
             sortedProducts.slice(start, end).length > 0 && (
@@ -246,6 +258,11 @@ const ProductTable = () => {
           totalPages={totalPages}
           handlePageChange={handlePageChange}
           getPaginationNumbers={getPaginationNumbers}
+          itemsPerPage={itemsPerPage}
+          itemsPerPageOptions={itemsPerPageOptions}
+          onItemsPerPageChange={handleItemsPerPageChange}
+          showDropdown={showDropdown}
+          setShowDropdown={setShowDropdown}
         />
       </div>
     </div>

@@ -70,18 +70,12 @@ const CategoriesDropdown = ({
               <div className="text-sm font-semibold text-gray-700">
                 Select Categories
               </div>
-              <div className="flex gap-1">
+              <div className="flex gap-1 items-center justify-center">
                 <button
                   onClick={selectAllCategories}
-                  className="text-xs text-blue-600 hover:text-blue-800 px-2 py-1 rounded hover:bg-blue-50"
+                  className="text-xs text-gray-600 border border-gray-100 hover:text-gray-800 px-2 py-1 mt-0.5 rounded hover:bg-gray-50"
                 >
                   All
-                </button>
-                <button
-                  onClick={clearAllCategories}
-                  className="text-xs text-gray-600 hover:text-gray-800 px-2 py-1 rounded hover:bg-gray-50"
-                >
-                  Clear
                 </button>
               </div>
             </div>
@@ -117,10 +111,17 @@ const CategoriesDropdown = ({
 
             {/* Selected Count */}
             {selectedCategories.length > 0 && (
-              <div className="mt-3 pt-3 border-t border-gray-200">
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-200">
                 <div className="text-xs text-gray-500">
                   {selectedCategories.length} category selected
                 </div>
+
+                <button
+                  onClick={clearAllCategories}
+                  className="text-xs text-gray-600 border border-gray-100 hover:text-gray-800 px-2 py-1  mt-0.5  rounded hover:bg-gray-50"
+                >
+                  Clear
+                </button>
               </div>
             )}
           </div>
