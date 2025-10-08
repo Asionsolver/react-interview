@@ -17,11 +17,12 @@ import Table from "./table";
 import { useMemo } from "react";
 import CategoriesDropdown from "./categories-dropdown";
 import ActiveFilter from "./active-filter";
+import AdvancedFilterDropdown from "./advanced-filter-dropdown";
 
 const ProductTable = () => {
   // Sample product data
   const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState(initialProducts);
+  const [products] = useState(initialProducts);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
@@ -34,15 +35,33 @@ const ProductTable = () => {
 
   // Items per page options
   const itemsPerPageOptions = [5, 10, 15, 20, 25, 30];
+  // New states for advanced filters
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [priceFilter, setPriceFilter] = useState({
+    min: "",
+    max: "",
+    type: "none", // 'none', 'low-to-high', 'high-to-low', 'custom-range'
+  });
+  const [statusFilter, setStatusFilter] = useState([]);
+  const [stockFilter, setStockFilter] = useState({
+    min: "",
+    max: "",
+    type: "none", // 'none', 'low-stock', 'out-of-stock', 'custom-range'
+  });
+
+  // Status options
+  const statusOptions = ["Active", "Out of Stock", "Low Stock"];
 
   // Extract unique categories from products
   const categories = useMemo(() => {
     return [...new Set(products.map((product) => product.category))];
   }, [products]);
 
+  // Filtering logic of the ProductTable component
   const filteredProducts = useMemo(() => {
     let filtered = products;
 
+    // Search filter
     if (searchTerm) {
       filtered = filtered.filter(
         (product) =>
@@ -53,30 +72,103 @@ const ProductTable = () => {
       );
     }
 
-    // Multiple categories filter
+    // Categories filter
     if (selectedCategories.length > 0) {
       filtered = filtered.filter((product) =>
         selectedCategories.includes(product.category)
       );
     }
 
+    // Status filter - FIXED
+    if (statusFilter.length > 0) {
+      filtered = filtered.filter((product) =>
+        statusFilter.includes(product.status)
+      );
+    }
+
+    // Stock filter - FIXED
+    if (stockFilter.type !== "none") {
+      filtered = filtered.filter((product) => {
+        const stock = product.quantityInStock;
+
+        switch (stockFilter.type) {
+          case "low-stock":
+            return stock > 0 && stock < 10;
+          case "out-of-stock":
+            return stock === 0;
+          case "custom-range": {
+            const min = stockFilter.min ? parseInt(stockFilter.min) : 0;
+            const max = stockFilter.max ? parseInt(stockFilter.max) : Infinity;
+            return stock >= min && stock <= max;
+          }
+          default:
+            return true;
+        }
+      });
+    }
+
+    // Price filter - FIXED (custom range only, sorting will handle low-to-high/high-to-low)
+    if (priceFilter.type === "custom-range") {
+      filtered = filtered.filter((product) => {
+        const price = product.price;
+        const min = priceFilter.min ? parseFloat(priceFilter.min) : 0;
+        const max = priceFilter.max ? parseFloat(priceFilter.max) : Infinity;
+        return price >= min && price <= max;
+      });
+    }
+
     return filtered;
-  }, [products, searchTerm, selectedCategories]);
+  }, [
+    products,
+    searchTerm,
+    selectedCategories,
+    statusFilter,
+    stockFilter,
+    priceFilter,
+  ]);
 
-  // Sort functionality
+  // Sort functionality with price filter integration
   const sortedProducts = useMemo(() => {
-    if (!sortConfig.key) return filteredProducts;
+    let productsToSort = [...filteredProducts];
 
-    return [...filteredProducts].sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) {
-        return sortConfig.direction === "asc" ? -1 : 1;
-      }
-      if (a[sortConfig.key] > b[sortConfig.key]) {
-        return sortConfig.direction === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
-  }, [filteredProducts, sortConfig]);
+    // Price-based sorting (when price filter is set to low-to-high or high-to-low)
+    if (priceFilter.type === "low-to-high") {
+      return productsToSort.sort((a, b) => a.price - b.price);
+    } else if (priceFilter.type === "high-to-low") {
+      return productsToSort.sort((a, b) => b.price - a.price);
+    }
+
+    // Other column sorting
+    if (sortConfig.key) {
+      return productsToSort.sort((a, b) => {
+        // Handle different data types
+        let aValue = a[sortConfig.key];
+        let bValue = b[sortConfig.key];
+
+        // Convert to numbers if possible for numeric comparison
+        if (!isNaN(aValue) && !isNaN(bValue)) {
+          aValue = parseFloat(aValue);
+          bValue = parseFloat(bValue);
+        }
+
+        // Date comparison
+        if (sortConfig.key === "createdAt") {
+          aValue = new Date(aValue).getTime();
+          bValue = new Date(bValue).getTime();
+        }
+
+        if (aValue < bValue) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (aValue > bValue) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+
+    return productsToSort;
+  }, [filteredProducts, sortConfig, priceFilter.type]);
 
   const handleSort = (key) => {
     let direction = "asc";
@@ -200,14 +292,19 @@ const ProductTable = () => {
 
           {/* Actions */}
           <div className="flex gap-2 w-full md:w-auto">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-              <FaFilter className="text-gray-600" />
-              <span>Filter</span>
-            </button>
-            {/* <button className="flex items-center gap-2 px-4 py-2  border border-gray-300   rounded-lg hover:bg-gray-50  transition-colors">
-              <RiEqualizer2Line className="rotate-90" />
-              <span>Categories</span>
-            </button> */}
+            <AdvancedFilterDropdown
+              showFilterDropdown={showFilterDropdown}
+              setShowFilterDropdown={setShowFilterDropdown}
+              priceFilter={priceFilter}
+              setPriceFilter={setPriceFilter}
+              statusFilter={statusFilter}
+              setStatusFilter={setStatusFilter}
+              stockFilter={stockFilter}
+              setStockFilter={setStockFilter}
+              statusOptions={statusOptions}
+              onApplyFilters={() => setCurrentPage(1)}
+              onClearFilters={() => setCurrentPage(1)}
+            />
 
             <CategoriesDropdown
               products={products}
@@ -229,6 +326,12 @@ const ProductTable = () => {
           selectedCategories={selectedCategories}
           setSelectedCategories={setSelectedCategories}
           clearAllCategories={clearAllCategories}
+          priceFilter={priceFilter}
+          setPriceFilter={setPriceFilter}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          stockFilter={stockFilter}
+          setStockFilter={setStockFilter}
         />
       </div>
 
