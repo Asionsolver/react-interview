@@ -9,6 +9,7 @@ import Otp from "./components/otp/otp";
 import Pagination from "./components/pagination/pagination";
 import ProgressBar from "./components/progress-bar/progress-bar";
 import TabForm from "./components/tab-form/tab-form";
+import ProductTable from "./components/table/product-table";
 import Theme from "./components/theme/theme";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Todo from "./components/todo-list/todo";
@@ -20,7 +21,7 @@ function App() {
       {/* <TabForm /> */}
       {/* <ProblemOne /> */}
       {/* <ProblemTwo /> */}
-      <ProblemThree />
+      {/* <ProblemThree /> */}
       {/* <Pagination /> */}
       {/* <AutoSearchBar /> */}
       {/* <ProgressBar /> */}
@@ -29,6 +30,7 @@ function App() {
       {/* <Otp /> */}
       {/* <ChipsInput /> */}
       {/* <Todo /> */}
+      <ProductTable />
     </>
   );
 }
