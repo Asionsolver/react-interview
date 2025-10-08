@@ -1,6 +1,7 @@
 import Accordion from "./components/accordion";
 import AutoSearchBar from "./components/autocomplete-searchbar/auto-searchbar";
 import ProblemOne from "./components/bento-grid/problem-one";
+import ProblemThree from "./components/bento-grid/problem-three";
 import ProblemTwo from "./components/bento-grid/problem-two";
 import ChipsInput from "./components/chips-input/chips-input";
 import FileExplorer from "./components/file-explorer/file-explorer";
@@ -19,6 +20,7 @@ function App() {
       {/* <TabForm /> */}
       {/* <ProblemOne /> */}
       {/* <ProblemTwo /> */}
+      <ProblemThree />
       {/* <Pagination /> */}
       {/* <AutoSearchBar /> */}
       {/* <ProgressBar /> */}
@@ -26,7 +28,7 @@ function App() {
       {/* <Theme /> */}
       {/* <Otp /> */}
       {/* <ChipsInput /> */}
-      <Todo />
+      {/* <Todo /> */}
     </>
   );
 }
