@@ -18,6 +18,7 @@ import { useMemo } from "react";
 import CategoriesDropdown from "./categories-dropdown";
 import ActiveFilter from "./active-filter";
 import AdvancedFilterDropdown from "./advanced-filter-dropdown";
+import SupplierDropdown from "./supplier-dropdown";
 
 const ProductTable = () => {
   // Sample product data
@@ -49,6 +50,10 @@ const ProductTable = () => {
     type: "none", // 'none', 'low-stock', 'out-of-stock', 'custom-range'
   });
 
+  // New state for supplier filter
+  const [selectedSuppliers, setSelectedSuppliers] = useState([]);
+  const [showSupplierDropdown, setShowSupplierDropdown] = useState(false);
+
   // Status options
   const statusOptions = ["Active", "Out of Stock", "Low Stock"];
 
@@ -56,6 +61,13 @@ const ProductTable = () => {
   const categories = useMemo(() => {
     return [...new Set(products.map((product) => product.category))];
   }, [products]);
+
+  // Extract unique suppliers from products
+  const suppliers = useMemo(() => {
+    return [...new Set(products.map((product) => product.suppliers))];
+  }, [products]);
+
+  console.log(suppliers);
 
   // Filtering logic of the ProductTable component
   const filteredProducts = useMemo(() => {
@@ -117,6 +129,13 @@ const ProductTable = () => {
       });
     }
 
+    // Supplier filter - NEW
+    if (selectedSuppliers.length > 0) {
+      filtered = filtered.filter((product) =>
+        selectedSuppliers.includes(product.suppliers)
+      );
+    }
+
     return filtered;
   }, [
     products,
@@ -125,6 +144,7 @@ const ProductTable = () => {
     statusFilter,
     stockFilter,
     priceFilter,
+    selectedSuppliers,
   ]);
 
   // Sort functionality with price filter integration
@@ -306,6 +326,17 @@ const ProductTable = () => {
               onClearFilters={() => setCurrentPage(1)}
             />
 
+            <SupplierDropdown
+              products={products}
+              suppliers={suppliers}
+              selectedSuppliers={selectedSuppliers}
+              setSelectedSuppliers={setSelectedSuppliers}
+              showSupplierDropdown={showSupplierDropdown}
+              setShowSupplierDropdown={setShowSupplierDropdown}
+              setCurrentPage={setCurrentPage}
+              clearAllSuppliers={() => setSelectedSuppliers([])}
+            />
+
             <CategoriesDropdown
               products={products}
               categories={categories}
@@ -332,6 +363,8 @@ const ProductTable = () => {
           setStatusFilter={setStatusFilter}
           stockFilter={stockFilter}
           setStockFilter={setStockFilter}
+          selectedSuppliers={selectedSuppliers}
+          setSelectedSuppliers={setSelectedSuppliers}
         />
       </div>
 

@@ -1,5 +1,5 @@
 import { FaEdit, FaSort, FaTrash } from "react-icons/fa";
-
+import { HiOutlineDotsVertical } from "react-icons/hi";
 function Table({
   sortedProducts,
   handleSort,
@@ -123,11 +123,11 @@ function Table({
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <div className="flex items-center gap-2">
                   <button className="text-blue-600 hover:text-blue-900 transition-colors">
-                    <FaEdit />
+                    <HiOutlineDotsVertical />
                   </button>
-                  <button className="text-red-600 hover:text-red-900 transition-colors">
+                  {/* <button className="text-red-600 hover:text-red-900 transition-colors">
                     <FaTrash />
-                  </button>
+                  </button> */}
                 </div>
               </td>
             </tr>

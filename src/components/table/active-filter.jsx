@@ -12,6 +12,8 @@ const ActiveFilter = ({
   setStatusFilter,
   stockFilter,
   setStockFilter,
+  selectedSuppliers,
+  setSelectedSuppliers,
 }) => {
   const clearPriceFilter = () => {
     setPriceFilter({ min: "", max: "", type: "none" });
@@ -24,17 +26,22 @@ const ActiveFilter = ({
   const clearStockFilter = () => {
     setStockFilter({ min: "", max: "", type: "none" });
   };
+  const clearSupplierFilter = () => {
+    setSelectedSuppliers([]);
+  };
 
   const clearAllAdvancedFilters = () => {
     clearPriceFilter();
     clearStatusFilter();
     clearStockFilter();
+    clearSupplierFilter();
   };
 
   const hasAdvancedFilters =
     priceFilter.type !== "none" ||
     statusFilter.length > 0 ||
-    stockFilter.type !== "none";
+    stockFilter.type !== "none" ||
+    selectedSuppliers.length > 0;
 
   const hasAnyFilters =
     searchTerm || selectedCategories.length > 0 || hasAdvancedFilters;
@@ -63,16 +70,41 @@ const ActiveFilter = ({
           {selectedCategories.map((category) => (
             <span
               key={category}
-              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs bg-amber-100 text-amber-800"
+              className="inline-flex relative items-center gap-1 px-3 py-1 rounded-full text-xs bg-amber-100 text-amber-800"
             >
-              {category}
+              <span className="mr-4">{category}</span>
               <button
                 onClick={() =>
                   setSelectedCategories((prev) =>
                     prev.filter((c) => c !== category)
                   )
                 }
-                className="text-amber-600 hover:text-amber-800 ml-1"
+                className="absolute right-1 bg-amber-300 px-[4.5px] py-[0.5px] rounded-full hover:bg-amber-800 text-amber-600 hover:text-white ml-1 cursor-pointer"
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+
+      {/* Suppliers Filter - NEW */}
+      {selectedSuppliers.length > 0 && (
+        <div className="flex flex-wrap gap-1">
+          <span className="text-xs text-gray-600 self-center">Suppliers:</span>
+          {selectedSuppliers.map((supplier) => (
+            <span
+              key={supplier}
+              className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs bg-purple-100 text-purple-800"
+            >
+              {supplier}
+              <button
+                onClick={() =>
+                  setSelectedSuppliers((prev) =>
+                    prev.filter((s) => s !== supplier)
+                  )
+                }
+                className="text-purple-600 hover:text-purple-800 ml-1"
               >
                 ×
               </button>
@@ -126,6 +158,8 @@ const ActiveFilter = ({
           onClick={() => {
             setSearchTerm("");
             setSelectedCategories([]);
+            clearAllAdvancedFilters();
+            setSelectedSuppliers([]);
             clearAllAdvancedFilters();
           }}
           className="text-xs text-gray-600 hover:text-gray-800 underline self-center"
