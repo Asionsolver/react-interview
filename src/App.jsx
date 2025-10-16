@@ -8,6 +8,9 @@ import FileExplorer from "./components/file-explorer/file-explorer";
 import Otp from "./components/otp/otp";
 import Pagination from "./components/pagination/pagination";
 import ProgressBar from "./components/progress-bar/progress-bar";
+import Modal from "./components/react-portal/modal";
+import PortalModal from "./components/react-portal/portal-modal";
+import TraditionalModal from "./components/react-portal/traditional-modal";
 import TabForm from "./components/tab-form/tab-form";
 import ProductTable from "./components/table/product-table";
 import Theme from "./components/theme/theme";
@@ -30,7 +33,10 @@ function App() {
       {/* <Otp /> */}
       {/* <ChipsInput /> */}
       {/* <Todo /> */}
-      <ProductTable />
+      {/* <ProductTable /> */}
+      {/* <Modal /> */}
+      <TraditionalModal />
+      <PortalModal />
     </>
   );
 }
