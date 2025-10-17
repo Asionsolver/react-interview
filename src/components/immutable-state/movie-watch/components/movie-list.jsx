@@ -8,6 +8,7 @@ const MovieList = ({
   restoreMovie,
   permanentDelete,
   currentTab,
+  onEdit,
 }) => {
   return (
     <div>
@@ -25,6 +26,7 @@ const MovieList = ({
               restoreMovie={restoreMovie}
               permanentDelete={permanentDelete}
               currentTab={currentTab}
+              onEdit={onEdit}
             />
           ))}
         </ul>

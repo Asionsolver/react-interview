@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import "tailwindcss";
-
+@plugin 'tailwind-scrollbar';
 /* Tailwind এ custom theme variables */
 @theme {
   --color-background: var(--background);
@@ -16,6 +16,34 @@
 
   --color-white: hsl(0, 0%, 100%);
   --color-black: hsl(0, 0%, 7%);
+}
+
+/* globals.css (imported after tailwind styles) */
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #4b5563 #111827; /* (thumb color) (track color) for Firefox */
+}
+
+/* WebKit browsers (Chrome, Edge, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(17, 24, 39, 0.6); /* tailwind gray-900/60 */
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #374151; /* tailwind gray-700 */
+  border-radius: 9999px;
+  border: 2px solid rgba(17, 24, 39, 0); /* spacing around thumb */
+}
+
+/* hover state */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #4b5563; /* tailwind gray-600 */
 }
 
 @layer base {

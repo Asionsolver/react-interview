@@ -11,7 +11,7 @@ const MovieWatch = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [currentTab, setCurrentTab] = useState("all");
-
+  const [editingMovie, setEditingMovie] = useState(null);
   const { showToast } = useToast();
   useEffect(() => {
     localStorage.setItem("movies", JSON.stringify(movies));
@@ -72,11 +72,22 @@ const MovieWatch = () => {
     setMovies((prev) => prev.filter((m) => m.id !== id));
     showToast("Movie permanently deleted!", "success");
   };
+  const startEdit = (movie) => setEditingMovie(movie);
 
+  const updateMovie = (updatedMovie) => {
+    setMovies((prev) =>
+      prev.map((m) => (m.id === updatedMovie.id ? updatedMovie : m))
+    );
+    setEditingMovie(null);
+  };
   return (
     <div className="flex flex-col  w-full max-w-6xl m-3 items-center  p-6 bg-slate-900 text-white rounded-lg shadow-lg">
       <Heading />
-      <MovieForm addMovie={handleAddMovie} />
+      <MovieForm
+        addMovie={handleAddMovie}
+        updateMovie={updateMovie}
+        editingMovie={editingMovie}
+      />
       <CurrentTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <MovieList
         movies={filteredMovies}
@@ -86,6 +97,7 @@ const MovieWatch = () => {
         currentTab={currentTab}
         restoreMovie={restoreMovie}
         permanentDelete={permanentDelete}
+        onEdit={startEdit}
       />
       <button
         onClick={() => {

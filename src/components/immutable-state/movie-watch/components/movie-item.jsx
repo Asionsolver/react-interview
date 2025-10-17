@@ -1,9 +1,10 @@
-import ReactStars from "react-stars";
+import ReactStars2 from "react-stars";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { LiaToggleOffSolid } from "react-icons/lia";
 import { LiaToggleOnSolid } from "react-icons/lia";
 import { MdOutlineRestore } from "react-icons/md";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 const MovieItem = ({
   movie,
   rateMovie,
@@ -12,6 +13,7 @@ const MovieItem = ({
   restoreMovie,
   permanentDelete,
   currentTab,
+  onEdit,
 }) => {
   const handleRatingChange = (newRating) => {
     rateMovie(movie.id, newRating);
@@ -60,7 +62,7 @@ const MovieItem = ({
 
         <div className="mt-2 flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <ReactStars
+            <ReactStars2
               count={5}
               onChange={handleRatingChange}
               size={18}
@@ -121,7 +123,13 @@ const MovieItem = ({
                 <LiaToggleOffSolid size={28} />
               )}
             </button>
-
+            <button
+              onClick={() => onEdit(movie)}
+              className="p-2 rounded-full bg-blue-600/10 text-blue-400 hover:bg-blue-600/20
+                         hover:text-blue-200"
+            >
+              <CiEdit size={20} />
+            </button>
             <button
               onClick={() => deleteMovie(movie.id)}
               className="p-2 rounded-full bg-red-600/10 text-red-400 hover:bg-red-600/20
