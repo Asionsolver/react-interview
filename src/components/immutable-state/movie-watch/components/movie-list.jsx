@@ -11,11 +11,11 @@ const MovieList = ({
   onEdit,
 }) => {
   return (
-    <div>
+    <div className="w-full max-w-2xl mx-auto px-4">
       {movies.length === 0 ? (
         <p className="mt-4 text-center text-gray-400">No movies added yet.</p>
       ) : (
-        <ul className="max-w-full w-full mt-4 flex flex-col gap-4">
+        <ul className="  mt-4 flex flex-col gap-4">
           {movies.map((movie) => (
             <MovieItem
               key={movie.id}

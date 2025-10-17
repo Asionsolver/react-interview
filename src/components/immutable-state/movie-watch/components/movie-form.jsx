@@ -2,16 +2,9 @@ import { useState } from "react";
 import { useToast } from "./useToast";
 import CustomDropdown from "./custom-dropdown";
 import { useEffect } from "react";
-const OTT_OPTIONS = [
-  { value: "netflix", label: "Netflix" },
-  { value: "prime", label: "Amazon Prime" },
-  { value: "disney", label: "Disney+ Hotstar" },
-  { value: "hulu", label: "Hulu" },
-  { value: "hbomax", label: "HBO Max" },
-  { value: "apple", label: "Apple TV+" },
-  { value: "peacock", label: "Peacock" },
-];
-const MovieForm = ({ addMovie, updateMovie, editingMovie }) => {
+import { OTT_OPTIONS } from "../../../../data/ott";
+
+const MovieForm = ({ addMovie, updateMovie, editingMovie, cancelEdit }) => {
   const [movieData, setMovieData] = useState({
     title: "",
     ott: "",
@@ -31,19 +24,35 @@ const MovieForm = ({ addMovie, updateMovie, editingMovie }) => {
       });
     }
   }, [editingMovie]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("Movie Data Submitted:", movieData);
-    if (!movieData?.title.trim() || !movieData?.ott.trim()) {
+    const trimmedTitle = movieData.title.trim();
+    const trimmedOtt = movieData.ott.trim();
+
+    if (!trimmedTitle || !trimmedOtt) {
       showToast("Please fill in all fields!", "warning");
       return;
     }
 
     if (editingMovie) {
-      updateMovie({ ...editingMovie, ...movieData });
+      if (
+        trimmedTitle === editingMovie.title &&
+        trimmedOtt === editingMovie.ott
+      ) {
+        showToast("No changes made to update!", "info");
+        return;
+      }
+      const updatedMovie = {
+        ...editingMovie,
+        title: trimmedTitle,
+        ott: trimmedOtt,
+      };
+      updateMovie(updatedMovie);
       showToast("Movie updated successfully!", "success");
     } else {
-      addMovie(movieData);
+      addMovie({ title: trimmedTitle, ott: trimmedOtt });
       showToast("Movie added successfully!", "success");
     }
     // Reset form
@@ -73,6 +82,7 @@ const MovieForm = ({ addMovie, updateMovie, editingMovie }) => {
         className="flex-1 p-2 border border-gray-700 bg-gray-800 rounded text-white"
         onChange={handleChange}
       />
+
       <CustomDropdown
         id="ott-dropdown"
         value={movieData?.ott}
@@ -87,6 +97,16 @@ const MovieForm = ({ addMovie, updateMovie, editingMovie }) => {
       >
         {editingMovie ? "Update Movie" : "Add Movie"}
       </button>
+
+      {editingMovie && (
+        <button
+          type="button"
+          onClick={cancelEdit}
+          className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Cancel
+        </button>
+      )}
     </form>
   );
 };

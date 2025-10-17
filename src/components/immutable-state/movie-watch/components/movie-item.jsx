@@ -5,6 +5,7 @@ import { LiaToggleOnSolid } from "react-icons/lia";
 import { MdOutlineRestore } from "react-icons/md";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { FaRegEye } from "react-icons/fa";
 const MovieItem = ({
   movie,
   rateMovie,
@@ -87,6 +88,13 @@ const MovieItem = ({
             {movie.watched ? "Watched" : "Unwatched"}
           </span>
         </div>
+
+        {movie.watched && movie.watchedDate && (
+          <p className="mt-1 text-xs text-gray-400 flex items-center gap-2">
+            <FaRegEye size={15} />
+            <span>{new Date(movie.watchedDate).toLocaleDateString()}</span>
+          </p>
+        )}
       </div>
 
       {/* Actions */}
@@ -114,6 +122,7 @@ const MovieItem = ({
         ) : (
           <>
             <button
+              title={movie.watched ? "Mark as Unwatched" : "Mark as Watched"}
               onClick={() => toggleWatched(movie.id)}
               className="p-2 rounded-md text-green-400 hover:text-green-200 hover:bg-gray-700/40"
             >
@@ -124,6 +133,7 @@ const MovieItem = ({
               )}
             </button>
             <button
+              title="Edit"
               onClick={() => onEdit(movie)}
               className="p-2 rounded-full bg-blue-600/10 text-blue-400 hover:bg-blue-600/20
                          hover:text-blue-200"
@@ -131,6 +141,7 @@ const MovieItem = ({
               <CiEdit size={20} />
             </button>
             <button
+              title="Delete"
               onClick={() => deleteMovie(movie.id)}
               className="p-2 rounded-full bg-red-600/10 text-red-400 hover:bg-red-600/20
                          hover:text-red-200"

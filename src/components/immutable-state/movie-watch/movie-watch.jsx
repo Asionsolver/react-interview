@@ -24,6 +24,7 @@ const MovieWatch = () => {
       rating: null,
       watched: false,
       isDeleted: false,
+      watchedDate: null,
     };
     setMovies((prevMovies) => [...prevMovies, newMovie]);
   };
@@ -48,7 +49,13 @@ const MovieWatch = () => {
   const handleToggleWatched = (movieId) => {
     setMovies((prevMovies) =>
       prevMovies.map((movie) =>
-        movie.id === movieId ? { ...movie, watched: !movie.watched } : movie
+        movie.id === movieId
+          ? {
+              ...movie,
+              watched: !movie.watched,
+              watchedDate: !movie.watched ? new Date().toISOString() : null,
+            }
+          : movie
       )
     );
     showToast("Movie toggled successfully!", "success");
@@ -87,6 +94,7 @@ const MovieWatch = () => {
         addMovie={handleAddMovie}
         updateMovie={updateMovie}
         editingMovie={editingMovie}
+        cancelEdit={() => setEditingMovie(null)}
       />
       <CurrentTab currentTab={currentTab} setCurrentTab={setCurrentTab} />
       <MovieList
