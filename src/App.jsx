@@ -5,6 +5,9 @@ import ProblemThree from "./components/bento-grid/problem-three";
 import ProblemTwo from "./components/bento-grid/problem-two";
 import ChipsInput from "./components/chips-input/chips-input";
 import FileExplorer from "./components/file-explorer/file-explorer";
+import UserList from "./components/immutable-state/immutability/user-list";
+import { ToastProvider } from "./components/immutable-state/movie-watch/components/ToastContext";
+import MovieWatch from "./components/immutable-state/movie-watch/movie-watch";
 import Otp from "./components/otp/otp";
 import Pagination from "./components/pagination/pagination";
 import ProgressBar from "./components/progress-bar/progress-bar";
@@ -19,7 +22,7 @@ import Todo from "./components/todo-list/todo";
 
 function App() {
   return (
-    <>
+    <ToastProvider>
       {/* <Accordion /> */}
       {/* <TabForm /> */}
       {/* <ProblemOne /> */}
@@ -35,9 +38,13 @@ function App() {
       {/* <Todo /> */}
       {/* <ProductTable /> */}
       {/* <Modal /> */}
-      <TraditionalModal />
-      <PortalModal />
-    </>
+      {/* <TraditionalModal /> */}
+      {/* <UserList /> */}
+      {/* <PortalModal /> */}
+      <div className="min-h-screen flex items-center justify-center bg-slate-950">
+        <MovieWatch />
+      </div>
+    </ToastProvider>
   );
 }
 
