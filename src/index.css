@@ -4,18 +4,42 @@
 /* Tailwind এ custom theme variables */
 @theme {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-text-primary: #3f3f3f;
+  --color-button-primary: #7f6df9;
+  --color-destructive: #ee4f4f;
+  --color-border-primary: #d2d2d2;
+  --color-scrollbar: #f2f2f2;
+  /* --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive-foreground: var(--destructive-foreground); 
+  
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --border-radius: var(--radius);
+  --color-selected: var(--selected);
+  --color-selected-text: var(--selected-text);
+  --color-hover-bg: var(--hover-bg);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
   --font-sans: "DM Sans", sans-serif;
   --color-purple-100: hsl(254, 88%, 90%);
   --color-purple-500: hsl(256, 67%, 59%);
-
   --color-yellow-100: hsl(31, 66%, 93%);
   --color-yellow-500: hsl(39, 100%, 71%);
-
   --color-white: hsl(0, 0%, 100%);
-  --color-black: hsl(0, 0%, 7%);
+  --color-black: hsl(0, 0%, 7%);  */
 }
 
 /* globals.css (imported after tailwind styles) */
@@ -81,27 +105,60 @@
 
 /* Default (Light) Theme */
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --primary: #2563eb; /* Blue */
-  --secondary: #9333ea; /* Purple */
+  --background: rgba(255, 255, 255, 1);
+  --foreground: rgba(33, 33, 33, 1);
+
+  --card: rgba(255, 255, 255, 1);
+  --card-foreground: rgba(33, 33, 33, 1);
+
+  --popover: rgba(255, 255, 255, 1);
+  --popover-foreground: rgba(33, 33, 33, 1);
+
+  --primary: rgba(134, 58, 255, 1);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --primary-hover: rgba(117, 47, 235, 1);
+
+  --secondary: rgba(245, 245, 246, 1);
+  --secondary-foreground: rgba(33, 33, 33, 1);
+
+  --muted: rgba(245, 245, 246, 1);
+  --muted-foreground: rgba(119, 119, 119, 1);
+
+  --accent: rgba(239, 229, 255, 1);
+  --accent-foreground: rgba(94, 24, 208, 1);
+
+  --destructive: rgba(239, 68, 68, 1);
+  --destructive-foreground: rgba(250, 250, 250, 1);
+
+  --border: rgba(230, 230, 232, 1);
+  --input: rgba(230, 230, 232, 1);
+  --ring: rgba(134, 58, 255, 1);
+
+  --radius: 0.5rem;
+
+  --selected: rgba(134, 58, 255, 1);
+  --selected-text: rgba(255, 255, 255, 1);
+  --hover-bg: rgba(239, 229, 255, 1);
+  --text-primary: rgba(33, 33, 33, 1);
+  --text-secondary: rgba(119, 119, 119, 1);
+  --text-muted: rgba(163, 163, 163, 1);
 }
 
 /* Dark Theme */
-[data-theme="dark"] {
+/* [data-theme="dark"] {
   --background: #0f172a;
   --foreground: #f8fafc;
-  --primary: #38bdf8; /* Cyan */
-  --secondary: #f472b6; /* Pink */
-}
+  --primary: #38bdf8; 
+  --secondary: #f472b6; 
+} */
 
 /* Green Theme */
-[data-theme="green"] {
+/* [data-theme="green"] {
   --background: #f0fdf4;
   --foreground: #064e3b;
-  --primary: #22c55e; /* Green */
+  --primary: #22c55e; 
   --secondary: #15803d;
-}
+} */
 
 /* @keyframes fade-scale {
   0% {
@@ -207,6 +264,7 @@
       }
     }
   }
+ 
 } */
 
 /* General Accordion Styles */
@@ -304,7 +362,9 @@
     animation: content-fade-scale 0.6s ease-in-out;
   }
 }
-
+.dropdown-scroll::-webkit-scrollbar-button {
+  @apply [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300;
+}
 @keyframes fade-in {
   0% {
     opacity: 0;

@@ -4,6 +4,7 @@ import ProblemOne from "./components/bento-grid/problem-one";
 import ProblemThree from "./components/bento-grid/problem-three";
 import ProblemTwo from "./components/bento-grid/problem-two";
 import ChipsInput from "./components/chips-input/chips-input";
+import DatePicker from "./components/date-picker/date-picker";
 import FileExplorer from "./components/file-explorer/file-explorer";
 import UserList from "./components/immutable-state/immutability/user-list";
 import { ToastProvider } from "./components/immutable-state/movie-watch/components/ToastContext";
@@ -41,9 +42,10 @@ function App() {
       {/* <TraditionalModal /> */}
       {/* <UserList /> */}
       {/* <PortalModal /> */}
-      <div className="min-h-screen flex items-center justify-center bg-slate-950">
+      <DatePicker />
+      {/* <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <MovieWatch />
-      </div>
+      </div> */}
     </ToastProvider>
   );
 }
