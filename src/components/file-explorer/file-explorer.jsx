@@ -1,63 +1,18 @@
-import Sidebar from "./components/sidebar";
-import MainContent from "./components/main-content";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import json from "./data.json";
 
-import MiniSidebar from "./components/mini-sidebar";
-import { useResizableSidebar } from "./hooks/useResizableSidebar";
-import { useCallback } from "react";
+import List from "./list";
 
 const FileExplorer = () => {
-  const {
-    width: sidebarWidth,
-    isResizing,
-    tooltipWidth,
-    startResizing,
-  } = useResizableSidebar(() => {
-    const savedWidth = localStorage.getItem("sidebar-width");
-    return savedWidth !== null ? parseFloat(savedWidth) : 20;
-  });
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
-    const savedOpen = localStorage.getItem("sidebar-open");
-    return savedOpen !== null ? JSON.parse(savedOpen) : true; // default open
-  });
-
-  // Save width to localStorage whenever it changes
-  useEffect(() => {
-    if (isSidebarOpen) {
-      const handle = setTimeout(() => {
-        localStorage.setItem("sidebar-width", sidebarWidth.toString()); // convert to string
-      }, 300); // debounce to avoid excessive writes
-      return () => clearTimeout(handle);
-    }
-  }, [sidebarWidth, isSidebarOpen]);
-
-  // Save open/close state to localStorage
-  useEffect(() => {
-    localStorage.setItem("sidebar-open", JSON.stringify(isSidebarOpen));
-  }, [isSidebarOpen]);
-
-  const handleSidebarToggle = useCallback(() => {
-    setIsSidebarOpen((prev) => !prev);
-  }, []);
-
+  const [data, setData] = useState(json);
   return (
-    <div className="flex h-screen w-full">
-      <MiniSidebar
-        onSidebarToggle={handleSidebarToggle}
-        isSidebarOpen={isSidebarOpen}
-      />
-
-      {isSidebarOpen && (
-        <Sidebar
-          isSidebarOpen={isSidebarOpen}
-          width={sidebarWidth}
-          handleResize={startResizing}
-          isResizing={isResizing}
-          tooltipWidth={tooltipWidth}
-        />
-      )}
-      <MainContent />
+    <div className="w-full pt-8 min-h-screen bg-amber-50 flex flex-col">
+      <h1 className="text-center text-2xl uppercase font-semibold">
+        File Explorer
+      </h1>
+      <div className="h-full flex flex-col items-center justify-center mt-10 w-full ">
+        <List list={data} />
+      </div>
     </div>
   );
 };

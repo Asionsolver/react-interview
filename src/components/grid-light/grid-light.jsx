@@ -27,8 +27,9 @@ const GridLight = () => {
 
   const handleActiveCell = (index) => {
     const newOrder = [...order, index];
-    setOrder(newOrder);
     console.log(newOrder);
+    setOrder(newOrder);
+
     // deactivate
     if (newOrder.length === config.flat(1).filter(Boolean).length) {
       handleDeActiveCell();

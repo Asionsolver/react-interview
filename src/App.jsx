@@ -5,7 +5,7 @@ import ProblemThree from "./components/bento-grid/problem-three";
 import ProblemTwo from "./components/bento-grid/problem-two";
 import ChipsInput from "./components/chips-input/chips-input";
 import DatePicker from "./components/date-picker/date-picker";
-import FileExplorer from "./components/file-explorer/file-explorer";
+import SideBar from "./components/sidebar/file-explorer";
 import GridLight from "./components/grid-light/grid-light";
 import UserList from "./components/immutable-state/immutability/user-list";
 import { ToastProvider } from "./components/immutable-state/movie-watch/components/ToastContext";
@@ -22,6 +22,7 @@ import ProductTable from "./components/table/product-table";
 import Theme from "./components/theme/theme";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Todo from "./components/todo-list/todo";
+import FileExplorer from "./components/file-explorer/file-explorer";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
       {/* <Pagination /> */}
       {/* <AutoSearchBar /> */}
       {/* <ProgressBar /> */}
-      {/* <FileExplorer /> */}
+      {/* <SideBar /> */}
       {/* <Theme /> */}
       {/* <Otp /> */}
       {/* <ChipsInput /> */}
@@ -49,7 +50,8 @@ function App() {
         <MovieWatch />
       </div> */}
       {/* <SelectableGrid /> */}
-      <GridLight />
+      {/* <GridLight /> */}
+      <FileExplorer />
     </ToastProvider>
   );
 }
