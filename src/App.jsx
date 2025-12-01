@@ -15,6 +15,7 @@ import ProgressBar from "./components/progress-bar/progress-bar";
 import Modal from "./components/react-portal/modal";
 import PortalModal from "./components/react-portal/portal-modal";
 import TraditionalModal from "./components/react-portal/traditional-modal";
+import SelectableGrid from "./components/selectable-grid/selectable-grid";
 import TabForm from "./components/tab-form/tab-form";
 import ProductTable from "./components/table/product-table";
 import Theme from "./components/theme/theme";
@@ -42,10 +43,11 @@ function App() {
       {/* <TraditionalModal /> */}
       {/* <UserList /> */}
       {/* <PortalModal /> */}
-      <DatePicker />
+      {/* <DatePicker /> */}
       {/* <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <MovieWatch />
       </div> */}
+      <SelectableGrid />
     </ToastProvider>
   );
 }
