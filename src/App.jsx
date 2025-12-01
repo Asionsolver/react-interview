@@ -6,6 +6,7 @@ import ProblemTwo from "./components/bento-grid/problem-two";
 import ChipsInput from "./components/chips-input/chips-input";
 import DatePicker from "./components/date-picker/date-picker";
 import FileExplorer from "./components/file-explorer/file-explorer";
+import GridLight from "./components/grid-light/grid-light";
 import UserList from "./components/immutable-state/immutability/user-list";
 import { ToastProvider } from "./components/immutable-state/movie-watch/components/ToastContext";
 import MovieWatch from "./components/immutable-state/movie-watch/movie-watch";
@@ -47,7 +48,8 @@ function App() {
       {/* <div className="min-h-screen flex items-center justify-center bg-slate-950">
         <MovieWatch />
       </div> */}
-      <SelectableGrid />
+      {/* <SelectableGrid /> */}
+      <GridLight />
     </ToastProvider>
   );
 }
