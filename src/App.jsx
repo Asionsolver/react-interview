@@ -26,6 +26,7 @@ import FileExplorer from "./components/file-explorer/file-explorer";
 import NestedCheckBoxes from "./components/nested-checkboxes/nested-checkboxes";
 import ProblemFour from "./components/bento-grid/problem-four";
 import Stepper from "./components/stepper/stepper";
+import MultiSelectSearch from "./components/multi-select-search/multi-select-search";
 
 function App() {
   return (
@@ -57,7 +58,8 @@ function App() {
       {/* <FileExplorer /> */}
       {/* <NestedCheckBoxes /> */}
       {/* <ProblemFour /> */}
-      <Stepper />
+      {/* <Stepper /> */}
+      <MultiSelectSearch />
     </ToastProvider>
   );
 }
