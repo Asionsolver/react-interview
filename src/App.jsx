@@ -23,6 +23,7 @@ import Theme from "./components/theme/theme";
 import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Todo from "./components/todo-list/todo";
 import FileExplorer from "./components/file-explorer/file-explorer";
+import NestedCheckBoxes from "./components/nested-checkboxes/nested-checkboxes";
 
 function App() {
   return (
@@ -51,7 +52,8 @@ function App() {
       </div> */}
       {/* <SelectableGrid /> */}
       {/* <GridLight /> */}
-      <FileExplorer />
+      {/* <FileExplorer /> */}
+      <NestedCheckBoxes />
     </ToastProvider>
   );
 }

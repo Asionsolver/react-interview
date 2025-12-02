@@ -10,8 +10,8 @@ const FileExplorer = () => {
       <h1 className="text-center text-2xl uppercase font-semibold">
         File Explorer
       </h1>
-      <div className="h-full flex flex-col items-center justify-center mt-10 w-full ">
-        <List list={data} />
+      <div className="flex flex-col items-center justify-center mt-10 w-full bg-red-700">
+        <List list={data} setData={setData} />
       </div>
     </div>
   );
