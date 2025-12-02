@@ -8,6 +8,8 @@ const MultiSelectSearch = () => {
   const [selectedUserSet, setSelectedUserSet] = useState(new Set());
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const inputRef = useRef(null);
+  const itemsRef = useRef(null);
+  itemsRef.current = [];
 
   const handleValueChange = (e) => {
     setSearchTerm(e.target.value);
@@ -27,6 +29,15 @@ const MultiSelectSearch = () => {
 
     fetchUser();
   }, [searchTerm]);
+
+  useEffect(() => {
+    if (itemsRef.current[highlightIndex]) {
+      itemsRef.current[highlightIndex].scrollIntoView({
+        block: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }, [highlightIndex]);
 
   const handleSelectUser = (user) => {
     setSelectedUsers([...selectedUsers, user]);
@@ -85,6 +96,12 @@ const MultiSelectSearch = () => {
     }
   };
 
+  const setItemsRef = (el) => {
+    if (el && !itemsRef.current.includes(el)) {
+      itemsRef.current.push(el);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex justify-center bg-gray-100 py-20">
       <div className="w-full relative px-4">
@@ -119,6 +136,7 @@ const MultiSelectSearch = () => {
                   <li
                     key={user.id}
                     onClick={() => handleSelectUser(user)}
+                    ref={setItemsRef}
                     className={`flex gap-3 items-center p-3 cursor-pointer border-b last:border-none ${
                       index === highlightIndex
                         ? "bg-blue-100"
