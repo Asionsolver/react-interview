@@ -24,6 +24,8 @@ import { ThemeProvider } from "./components/theme/ThemeProvider";
 import Todo from "./components/todo-list/todo";
 import FileExplorer from "./components/file-explorer/file-explorer";
 import NestedCheckBoxes from "./components/nested-checkboxes/nested-checkboxes";
+import ProblemFour from "./components/bento-grid/problem-four";
+import Stepper from "./components/stepper/stepper";
 
 function App() {
   return (
@@ -53,7 +55,9 @@ function App() {
       {/* <SelectableGrid /> */}
       {/* <GridLight /> */}
       {/* <FileExplorer /> */}
-      <NestedCheckBoxes />
+      {/* <NestedCheckBoxes /> */}
+      {/* <ProblemFour /> */}
+      <Stepper />
     </ToastProvider>
   );
 }

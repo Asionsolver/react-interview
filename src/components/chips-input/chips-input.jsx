@@ -5,6 +5,7 @@ const ChipsInput = () => {
   const [chips, setChips] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
+
   const handleValueChange = (e) => {
     setInputValue(e.target.value);
     setActiveIndex(-1);
@@ -54,6 +55,7 @@ const ChipsInput = () => {
       s.label.toLowerCase().includes(inputValue.toLowerCase()) &&
       !chips.some((chip) => chip.label === s.label)
   );
+
   const handleSuggestionClick = (suggestion) => {
     setChips([...chips, suggestion]);
     setInputValue("");
