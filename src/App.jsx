@@ -28,6 +28,7 @@ import ProblemFour from "./components/bento-grid/problem-four";
 import Stepper from "./components/stepper/stepper";
 import MultiSelectSearch from "./components/multi-select-search/multi-select-search";
 import CountDownTimer from "./components/countdown-timer/countdown-timer";
+import LoanCalculator from "./components/loan-calculator/load-calculator";
 
 function App() {
   return (
@@ -61,7 +62,8 @@ function App() {
       {/* <ProblemFour /> */}
       {/* <Stepper /> */}
       {/* <MultiSelectSearch /> */}
-      <CountDownTimer />
+      {/* <CountDownTimer /> */}
+      <LoanCalculator />
     </ToastProvider>
   );
 }
