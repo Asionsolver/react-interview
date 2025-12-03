@@ -27,6 +27,7 @@ import NestedCheckBoxes from "./components/nested-checkboxes/nested-checkboxes";
 import ProblemFour from "./components/bento-grid/problem-four";
 import Stepper from "./components/stepper/stepper";
 import MultiSelectSearch from "./components/multi-select-search/multi-select-search";
+import CountDownTimer from "./components/countdown-timer/countdown-timer";
 
 function App() {
   return (
@@ -59,7 +60,8 @@ function App() {
       {/* <NestedCheckBoxes /> */}
       {/* <ProblemFour /> */}
       {/* <Stepper /> */}
-      <MultiSelectSearch />
+      {/* <MultiSelectSearch /> */}
+      <CountDownTimer />
     </ToastProvider>
   );
 }
